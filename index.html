@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Miky</title>
+    <!-- Enlace al archivo de estilos CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="crossword-container">
+        <div class="grid-area">
+            <h1>Para Miky</h1>
+            <p class="subtitle">Completa el crucigrama</p>
+            <table id="grid-container"></table>
+             <button class="check-button" id="check-btn">¡Revisar respuestas!</button>
+        </div>
+        <div class="clues-area">
+            <div id="across-clues">
+                <h2>Horizontal</h2>
+                <ol class="clues-list"></ol>
+            </div>
+            <div id="down-clues">
+                <h2>Vertical</h2>
+                <ol class="clues-list"></ol>
+            </div>
+        </div>
+    </div>
+    
+    <div id="win-message">
+        <div class="win-box">
+            ¡GAnaste! Gracias por estar en mi vida, TE AMO 
+        </div>
+    </div>
+
+    <!-- El script se enlaza al final del body para asegurar que el HTML esté cargado -->
+    <script src="script.js"></script>
+</body>
+</html>

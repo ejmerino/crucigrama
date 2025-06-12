@@ -1,0 +1,224 @@
+/* --- FUENTES Y ESTILOS GENERALES --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+    --primary-color: #1f7600;
+    --secondary-color: #00540e;
+    --background-color: #003b1b;
+    --dark-cell-color: #2c3e50;
+    --light-cell-color: #ffffff;
+    --text-dark: #34495e;
+    --correct-color: #27ae60;
+    --incorrect-color: #c0392b;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* --- CONTENEDOR PRINCIPAL --- */
+.crossword-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    background-color: var(--light-cell-color);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    width: 100%;
+}
+
+/* --- ÁREA DEL CRUCIGRAMA --- */
+.grid-area {
+    flex: 2;
+    min-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    text-align: center;
+    color: var(--text-dark);
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1em;
+}
+
+#grid-container {
+    border-collapse: collapse;
+    background-color: var(--dark-cell-color);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    border: 3px solid var(--dark-cell-color);
+}
+
+.grid-cell {
+    width: 35px;
+    height: 35px;
+    border: 1px solid #7f8c8d;
+    text-align: center;
+    position: relative; /* Clave para el posicionamiento interno */
+}
+
+.word-cell {
+    background-color: var(--light-cell-color);
+}
+
+/* --- ESTILOS CORREGIDOS PARA LA INTERACTIVIDAD --- */
+
+.cell-input {
+    /* El campo de texto ahora es una capa absoluta que ocupa toda la celda */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Se asegura que esté por debajo del número */
+    
+    /* Estilos visuales */
+    border: none;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+    background-color: transparent;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    color: var(--text-dark);
+}
+
+.cell-input:focus {
+     background-color: #f1c40f30;
+}
+
+.cell-number {
+    /* El número se posiciona sobre el campo de texto */
+    position: absolute;
+    top: 1px;
+    left: 2px;
+    z-index: 2; /* Se asegura que esté por encima del input */
+    
+    /* LA SOLUCIÓN CLAVE: El número es invisible para el ratón */
+    pointer-events: none; 
+    
+    /* Estilos visuales */
+    font-size: 10px;
+    font-weight: bold;
+    color: var(--text-dark);
+}
+
+
+/* --- Colores de Validación --- */
+.cell-input.correct {
+    color: var(--correct-color);
+    background-color: #e0f8e9;
+}
+
+.cell-input.incorrect {
+    color: var(--incorrect-color);
+    background-color: #fbe6e4;
+}
+
+
+/* --- ÁREA DE PISTAS --- */
+.clues-area {
+    flex: 1;
+    min-width: 300px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #eee;
+    align-self: flex-start;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.clues-area h2 {
+    margin-top: 0;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 10px;
+    position: sticky;
+    top: -20px;
+    background: #f9f9f9;
+}
+
+.clues-list { list-style: none; padding: 0; margin: 0; }
+.clues-list li { margin-bottom: 12px; line-height: 1.5; font-size: 14px; }
+.clues-list li strong { color: var(--text-dark); }
+
+/* --- BOTÓN Y MENSAJE FINAL --- */
+.check-button {
+    display: block;
+    width: 80%;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.check-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(1, 118, 22, 0.3);
+}
+
+#win-message {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.win-box {
+    background: #fff;
+    padding: 50px;
+    border-radius: 20px;
+    text-align: center;
+    color: var(--primary-color);
+    font-size: 2.5em;
+    font-weight: 700;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    animation: pop-in 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+@keyframes pop-in {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .crossword-container { flex-direction: column; }
+    .grid-cell { width: 28px; height: 28px; }
+    .cell-input { font-size: 14px; }
+    .clues-area { max-height: 300px; }
+}
